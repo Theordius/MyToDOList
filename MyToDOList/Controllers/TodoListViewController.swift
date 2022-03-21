@@ -64,9 +64,8 @@ class TodoListViewController: UITableViewController {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         saveItems()
-        
-        tableView.reloadData()
-                     
+       
+                           
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -96,5 +95,21 @@ class TodoListViewController: UITableViewController {
         saveItems()
         
     }
+    
+    //MARK: - Model Modification Methods
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(self.itemArray)
+            let data.write(to: self.dataFilePath!)
+        } catch {
+            print("Errir encoding item array, \(error)")
+            
+        }
+        self.tableView.reloadData() //bez tego widok tabeli się nie odświeży
+    }
+    
 }
 
