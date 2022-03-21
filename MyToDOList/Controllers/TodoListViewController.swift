@@ -15,7 +15,7 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(dataFilePath)
+        print(dataFilePath!)
       
         loadItems()
         
@@ -95,7 +95,7 @@ class TodoListViewController: UITableViewController {
             let data = try encoder.encode(itemArray)
             try data.write(to: dataFilePath!)
         } catch {
-            print("Errir encoding item array, \(error)")
+            print("Error encoding item array, \(error)")
             
         }
         self.tableView.reloadData() //bez tego widok tabeli się nie odświeży
@@ -112,3 +112,6 @@ class TodoListViewController: UITableViewController {
         }
     }
 }
+
+
+
