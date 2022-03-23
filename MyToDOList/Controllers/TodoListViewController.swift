@@ -20,9 +20,7 @@ class TodoListViewController: UITableViewController {
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
-        
-        loadItems(with: request)
+        loadItems()
         
     }
     
@@ -107,7 +105,9 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData() //bez tego widok tabeli się nie odświeży
     }
     
-    func loadItems(with request: NSFetchRequest<Item>) {
+    // jeśli linijkę kodu zestawimy tak jak poniżej, to gdy nie bedzie war. zew. wczyta się wartość defaultowa
+    
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         
         do {
             itemArray = try contex.fetch(request)
@@ -129,11 +129,22 @@ extension TodoListViewController: UISearchBarDelegate {
         let request : NSFetchRequest<Item> = Item.fetchRequest()
         
         request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-
+        
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
         loadItems(with: request)
         
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            
+        }
     }
 }
 
