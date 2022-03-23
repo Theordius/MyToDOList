@@ -15,14 +15,14 @@ class TodoListViewController: UITableViewController {
     
     let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(dataFilePath!)
-      
-    //    loadItems()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+        
+        
+        loadItems()
         
     }
     
@@ -72,7 +72,7 @@ class TodoListViewController: UITableViewController {
             
             let newItem = Item(context: self.contex)
             newItem.title = textField.text!
-            
+            newItem.done = false
             self.itemArray.append(newItem)
             
             self.saveItems()
@@ -94,7 +94,7 @@ class TodoListViewController: UITableViewController {
     //MARK: - Model Manipulation Methods
     
     func saveItems() {
-      
+        
         do {
             try contex.save()
         } catch {
@@ -103,16 +103,15 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData() //bez tego widok tabeli się nie odświeży
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("Error decoding item array, \(error)")
-//            }
-//        }
-//    }
+    func loadItems() {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            itemArray = try contex.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+    }
+    
 }
 
 
