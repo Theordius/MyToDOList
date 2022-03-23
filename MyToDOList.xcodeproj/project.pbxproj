@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1008EE9927E910F400F4B678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008EE9827E910F400F4B678 /* AppDelegate.swift */; };
-		1008EE9B27E910F400F4B678 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008EE9A27E910F400F4B678 /* SceneDelegate.swift */; };
 		1008EE9D27E910F400F4B678 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008EE9C27E910F400F4B678 /* TodoListViewController.swift */; };
 		1008EEA027E910F400F4B678 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1008EE9E27E910F400F4B678 /* Main.storyboard */; };
 		1008EEA227E910F600F4B678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1008EEA127E910F600F4B678 /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 /* Begin PBXFileReference section */
 		1008EE9527E910F400F4B678 /* MyToDOList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyToDOList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1008EE9827E910F400F4B678 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1008EE9A27E910F400F4B678 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1008EE9C27E910F400F4B678 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		1008EE9F27E910F400F4B678 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1008EEA127E910F600F4B678 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				1008EE9827E910F400F4B678 /* AppDelegate.swift */,
-				1008EE9A27E910F400F4B678 /* SceneDelegate.swift */,
 				1008EEAE27E9116E00F4B678 /* Controllers */,
 				1008EEB327E911D200F4B678 /* Data Model */,
 				1008EEAF27E9119B00F4B678 /* Views */,
@@ -176,7 +173,6 @@
 				1008EEB227E911C900F4B678 /* Item.swift in Sources */,
 				1008EE9D27E910F400F4B678 /* TodoListViewController.swift in Sources */,
 				1008EE9927E910F400F4B678 /* AppDelegate.swift in Sources */,
-				1008EE9B27E910F400F4B678 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
