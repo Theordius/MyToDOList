@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My ToDO List-->
+        <!--Items-->
         <scene sceneID="t2A-Cd-Bxm">
             <objects>
                 <tableViewController id="9fa-EJ-4nP" customClass="TodoListViewController" customModule="MyToDOList" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             <outlet property="delegate" destination="9fa-EJ-4nP" id="4Xh-hm-fHY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My ToDO List" id="8Eg-jm-Di5">
+                    <navigationItem key="navigationItem" title="Items" id="8Eg-jm-Di5">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lzO-IX-Bws">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -50,7 +50,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWk-G9-OYp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1647.826086956522" y="105.80357142857143"/>
+            <point key="canvasLocation" x="1836" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oGs-QH-eFw">
@@ -68,19 +68,63 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9fa-EJ-4nP" kind="relationship" relationship="rootViewController" id="1tK-Rq-nJi"/>
+                        <segue destination="vn4-8u-GHX" kind="relationship" relationship="rootViewController" id="t9v-6t-DBb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tef-fd-pAs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="667" y="106"/>
+            <point key="canvasLocation" x="368" y="106"/>
+        </scene>
+        <!--My ToDO List-->
+        <scene sceneID="mHF-eV-RLp">
+            <objects>
+                <tableViewController id="vn4-8u-GHX" customClass="CategoryViewController" customModule="MyToDOList" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wgh-pH-dHE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="mQU-7T-oYR">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mQU-7T-oYR" id="1DX-LG-ctJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vn4-8u-GHX" id="zbn-Sn-BdM"/>
+                            <outlet property="delegate" destination="vn4-8u-GHX" id="tmv-Vw-3zn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My ToDO List" id="x7Q-0b-BXb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QPs-Fe-A9T">
+                            <color key="tintColor" systemColor="tintColor"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="vn4-8u-GHX" id="6TO-sQ-eqc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="9fa-EJ-4nP" kind="show" identifier="goToItems" id="aeb-IR-3hw"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iqK-aV-Nni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1161" y="106"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
