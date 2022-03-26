@@ -13,10 +13,10 @@ class CategoryViewController: UITableViewController {
     var categories = [Category]()
     
     let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     //MARK: - TableView Datasource Methods
@@ -36,6 +36,25 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data Manipulation Methods
     
+    func saveData() {
+        do {
+            try contex.save()
+        } catch {
+            print("Error saving contex \(error)")
+        }
+        self.tableView.reloadData()
+    }
+    
+    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+        
+        do {
+            categories = try contex.fetch(request)
+        } catch {
+            print("Error fetching data from contex \(error)")
+        }
+        tableView.reloadData()
+    }
+    
     
     //MARK: - Add New Categories
     
@@ -43,7 +62,7 @@ class CategoryViewController: UITableViewController {
         
     }
     
-   
+    
     
     //MARK: - Table Delegate Methods
     
