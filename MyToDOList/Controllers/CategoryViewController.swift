@@ -5,6 +5,7 @@
 //  Created by Rafał Gęsior on 24/03/2022.
 //
 
+
 import UIKit
 import CoreData
 
@@ -17,14 +18,16 @@ class CategoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadCategories()
+        
     }
-    
-    
     
     //MARK: - TableView Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return categories.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,6 +37,22 @@ class CategoryViewController: UITableViewController {
         cell.textLabel?.text = categories[indexPath.row].name
         
         return cell
+        
+    }
+    
+    
+    //MARK: - Table Delegate Methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToItems", sender: self)
+    }
+    
+    override func prepare(for sague: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = sague.destination as! TodoListViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
     }
     
     //MARK: - Data Manipulation Methods
@@ -44,7 +63,8 @@ class CategoryViewController: UITableViewController {
         } catch {
             print("Error saving contex \(error)")
         }
-        self.tableView.reloadData()
+        
+        tableView.reloadData()
     }
     
     func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
@@ -52,11 +72,13 @@ class CategoryViewController: UITableViewController {
         do {
             categories = try contex.fetch(request)
         } catch {
-            print("Error fetching data from contex \(error)")
+            print("Error loading categories \(error)")
         }
         
         tableView.reloadData()
     }
+    
+    
     
     
     //MARK: - Add New Categories
@@ -70,7 +92,6 @@ class CategoryViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
             
             let newCategory = Category(context: self.contex)
-            
             newCategory.name = textField.text!
             
             self.categories.append(newCategory)
@@ -80,6 +101,7 @@ class CategoryViewController: UITableViewController {
         }
         
         alert.addAction(action)
+        
         alert.addTextField { (field) in
             textField = field
             textField.placeholder = "Add a new category"
@@ -91,6 +113,6 @@ class CategoryViewController: UITableViewController {
     
     
     
-    //MARK: - Table Delegate Methods
+    
     
 }

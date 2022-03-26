@@ -50,7 +50,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWk-G9-OYp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="106"/>
+            <point key="canvasLocation" x="2177" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oGs-QH-eFw">
@@ -113,10 +113,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqK-aV-Nni" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="106"/>
+            <point key="canvasLocation" x="1294" y="106"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

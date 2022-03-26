@@ -5,6 +5,7 @@
 //  Created by Rafał Gęsior on 21/03/2022.
 //
 
+
 import UIKit
 import CoreData
 
@@ -13,14 +14,18 @@ class TodoListViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    var selectedCategory: Category? {
+        didSet{
+            loadItems()
+        }
+    }
+    
     let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
-        loadItems()
         
     }
     
@@ -39,7 +44,7 @@ class TodoListViewController: UITableViewController {
         cell.textLabel?.text = item.title
         
         //Ternary operator ==> Super sprawa :)
-        // value = condition ? valueIfTrue: valueIfFalse
+        //value = condition ? valueIfTrue: valueIfFalse
         
         cell.accessoryType = item.done ? .checkmark: .none
         
@@ -66,15 +71,15 @@ class TodoListViewController: UITableViewController {
         
         var textField = UITextField()
         
-        // what will happen when user clicks add item button
         let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            // co się stanie w momencie kiedy użytkownik kliknie przycisk "Add Item"
             
             let newItem = Item(context: self.contex)
             newItem.title = textField.text!
             newItem.done = false
-            
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             
             self.saveItems()
@@ -82,17 +87,17 @@ class TodoListViewController: UITableViewController {
         }
         
         alert.addTextField { (alertTextField) in
-            
             alertTextField.placeholder = "Create new item"
             textField = alertTextField
+            
         }
         
         alert.addAction(action)
+        
         present(alert, animated: true, completion: nil)
         
-        saveItems()
-        
     }
+    
     //MARK: - Model Manipulation Methods
     
     func saveItems() {
@@ -107,7 +112,19 @@ class TodoListViewController: UITableViewController {
     
     // jeśli linijkę kodu zestawimy tak jak poniżej, to gdy nie bedzie war. zew. wczyta się wartość defaultowa
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
+//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
+//
+//        request.predicate = compoundPredicate
         
         do {
             itemArray = try contex.fetch(request)
@@ -128,11 +145,11 @@ extension TodoListViewController: UISearchBarDelegate {
         
         let request : NSFetchRequest<Item> = Item.fetchRequest()
         
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        loadItems(with: request)
+        loadItems(with: request, predicate: predicate)
         
     }
     
