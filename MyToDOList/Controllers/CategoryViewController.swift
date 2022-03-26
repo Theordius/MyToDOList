@@ -19,6 +19,8 @@ class CategoryViewController: UITableViewController {
         
     }
     
+    
+    
     //MARK: - TableView Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +38,7 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data Manipulation Methods
     
-    func saveData() {
+    func saveCategories() {
         do {
             try contex.save()
         } catch {
@@ -45,13 +47,14 @@ class CategoryViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
         
         do {
             categories = try contex.fetch(request)
         } catch {
             print("Error fetching data from contex \(error)")
         }
+        
         tableView.reloadData()
     }
     
@@ -59,6 +62,30 @@ class CategoryViewController: UITableViewController {
     //MARK: - Add New Categories
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
+            
+            let newCategory = Category(context: self.contex)
+            
+            newCategory.name = textField.text!
+            
+            self.categories.append(newCategory)
+            
+            self.saveCategories()
+            
+        }
+        
+        alert.addAction(action)
+        alert.addTextField { (field) in
+            textField = field
+            textField.placeholder = "Add a new category"
+        }
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
