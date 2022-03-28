@@ -107,8 +107,10 @@ class TodoListViewController: UITableViewController {
         } catch {
             print("Error saving contex, \(error)")
         }
+        
         self.tableView.reloadData() //bez tego widok tabeli się nie odświeży
     }
+    
     
     // jeśli linijkę kodu zestawimy tak jak poniżej, to gdy nie bedzie war. zew. wczyta się wartość defaultowa
     
@@ -121,10 +123,6 @@ class TodoListViewController: UITableViewController {
         } else {
             request.predicate = categoryPredicate
         }
-        
-//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
-//
-//        request.predicate = compoundPredicate
         
         do {
             itemArray = try contex.fetch(request)
