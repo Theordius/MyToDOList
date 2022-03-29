@@ -13,9 +13,7 @@ class CategoryViewController: UITableViewController {
     
     let realm = try! Realm()
     
-    var categories = [Category]()
-    
-    let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var categories: Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +26,8 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return categories.count
+        //nil coelising operator
+        return categories?.count ?? 1
         
     }
     
@@ -36,7 +35,7 @@ class CategoryViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        cell.textLabel?.text = categories[indexPath.row].name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added"
         
         return cell
         
@@ -53,7 +52,7 @@ class CategoryViewController: UITableViewController {
         let destinationVC = sague.destination as! TodoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
@@ -73,16 +72,10 @@ class CategoryViewController: UITableViewController {
     
     func loadCategories() {
         
-//        do {
-//            categories = try contex.fetch(request)
-//        } catch {
-//            print("Error loading categories \(error)")
-//        }
-//
-//        tableView.reloadData()
+        let categories = realm.objects(Category.self)
+        
+        tableView.reloadData()
     }
-    
-    
     
     
     //MARK: - Add New Categories
@@ -97,8 +90,6 @@ class CategoryViewController: UITableViewController {
             
             let newCategory = Category()
             newCategory.name = textField.text!
-            
-            self.categories.append(newCategory)
             
             self.save(category: newCategory)
             
