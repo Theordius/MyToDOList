@@ -72,7 +72,7 @@ class CategoryViewController: UITableViewController {
     
     func loadCategories() {
         
-        let categories = realm.objects(Category.self)
+        categories = realm.objects(Category.self)
         
         tableView.reloadData()
     }
