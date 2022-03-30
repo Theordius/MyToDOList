@@ -104,6 +104,7 @@ class TodoListViewController: UITableViewController {
     
     func loadItems() {
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
+        
         tableView.reloadData()
     }
 }
